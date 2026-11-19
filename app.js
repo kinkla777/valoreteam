@@ -1,13 +1,13 @@
 const roster=[
-{name:'KINKLA',role:'LEADER',game:'IGL',img:'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=700&q=80'},
-{name:'NIGHT',role:'CO-LEADER',game:'RIFLER',img:'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=80'},
-{name:'VIPER',role:'ELITE',game:'ASSAULT',img:'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=80'},
-{name:'HAWK',role:'ELITE',game:'SCOUT',img:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=700&q=80'},
-{name:'ORACLE',role:'MANAGER',game:'MANAGEMENT',img:'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=700&q=80'},
-{name:'SHADOW',role:'VIP MEMBER',game:'VIP',img:'https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=700&q=80'},
-{name:'ROOKIE',role:'MEMBER',game:'MEMBER',img:'https://images.unsplash.com/photo-1531384441138-2736e62e0919?auto=format&fit=crop&w=700&q=80'}];
+{name:'KINKLA',role:'LEADER',game:'IGL'},
+{name:'NIGHT',role:'CO-LEADER',game:'RIFLER'},
+{name:'VIPER',role:'ELITE',game:'ASSAULT'},
+{name:'HAWK',role:'ELITE',game:'SCOUT'},
+{name:'ORACLE',role:'MANAGER',game:'MANAGEMENT'},
+{name:'SHADOW',role:'VIP MEMBER',game:'VIP'},
+{name:'ROOKIE',role:'MEMBER',game:'MEMBER'}];
 const rosterGrid=document.querySelector('#rosterGrid');
-function renderRoster(role='ALL'){rosterGrid.innerHTML=roster.filter(p=>role==='ALL'||p.role===role).map(p=>`<article class="player-card" data-role="${p.role}"><img src="${p.img}" alt="${p.name}"><div class="player-info"><small>${p.role} · ${p.game}</small><h3>${p.name}</h3></div></article>`).join('')}
+function renderRoster(role='ALL'){rosterGrid.innerHTML=roster.filter(p=>role==='ALL'||p.role===role).map(p=>`<article class="player-card" data-role="${p.role}"><div class="player-monogram">${p.name.slice(0,1)}</div><div class="player-info"><small>${p.role} · ${p.game}</small><h3>${p.name}</h3></div></article>`).join('')}
 renderRoster();
 document.querySelector('#roleFilter').onclick=e=>{if(e.target.tagName==='BUTTON'){document.querySelectorAll('.role-filter button').forEach(b=>b.classList.remove('active'));e.target.classList.add('active');renderRoster(e.target.dataset.role)}};
 document.querySelector('#menuBtn').onclick=()=>document.querySelector('#navLinks').classList.toggle('open');
