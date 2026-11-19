@@ -1,0 +1,33 @@
+const roster=[
+{name:'KINKLA',role:'LEADER',game:'IGL',img:'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=700&q=80'},
+{name:'NIGHT',role:'CO-LEADER',game:'RIFLER',img:'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=80'},
+{name:'VIPER',role:'ELITE',game:'ASSAULT',img:'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=80'},
+{name:'HAWK',role:'ELITE',game:'SCOUT',img:'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=700&q=80'},
+{name:'ORACLE',role:'MANAGER',game:'MANAGEMENT',img:'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=700&q=80'}];
+const rosterGrid=document.querySelector('#rosterGrid');
+function renderRoster(role='ALL'){rosterGrid.innerHTML=roster.filter(p=>role==='ALL'||p.role===role).map(p=>`<article class="player-card"><img src="${p.img}" alt="${p.name}"><div class="player-info"><small>${p.role} • ${p.game}</small><h3>${p.name}</h3></div></article>`).join('')}
+renderRoster();
+document.querySelector('#roleFilter').addEventListener('click',e=>{if(e.target.tagName==='BUTTON'){document.querySelectorAll('.role-filter button').forEach(b=>b.classList.remove('active'));e.target.classList.add('active');renderRoster(e.target.dataset.role)}});
+
+const menuBtn=document.querySelector('#menuBtn'),navLinks=document.querySelector('#navLinks');menuBtn.addEventListener('click',()=>navLinks.classList.toggle('open'));
+document.querySelector('#themeBtn').addEventListener('click',()=>document.body.classList.toggle('light'));
+
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+const storage={get(){return JSON.parse(localStorage.getItem('valorUsers')||'[]')},set(v){localStorage.setItem('valorUsers',JSON.stringify(v))}};
+let session=JSON.parse(localStorage.getItem('valorSession')||'null');
+const authModal=document.querySelector('#authModal'),authView=document.querySelector('#authView'),authBtn=document.querySelector('#authBtn');
+const closeAll=()=>document.querySelectorAll('dialog').forEach(d=>d.close());document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',closeAll));
+function renderAuth(){
+ if(session){const u=storage.get().find(x=>x.username===session.username);authView.innerHTML=`<div class="profile-bar"><span class="role-pill">${u?.role||'MEMBER'}</span></div><h2>${u?.username||session.username}</h2><p>${u?.contact||''}</p><p>Membership: <b>${u?.membership||'Inactive'}</b></p>${u?.role==='LEADER'?'<button class="btn btn-gold" id="adminBtn">Admin dashboard</button>':''}<br><button class="btn btn-outline" id="logoutBtn">Log out</button>`;document.querySelector('#logoutBtn').onclick=()=>{session=null;localStorage.removeItem('valorSession');renderAuth();updateAuthButton()};if(document.querySelector('#adminBtn'))document.querySelector('#adminBtn').onclick=renderAdmin;}
+ else authView.innerHTML=`<div class="auth-tabs"><button class="btn btn-gold" data-tab="login">Login</button><button class="btn btn-outline" data-tab="register">Register</button></div><div id="authForm"></div>`;
+ document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>renderAuthForm(b.dataset.tab));renderAuthForm('login');
+}
+function renderAuthForm(tab){const form=document.querySelector('#authForm');if(!form)return;if(tab==='login'){form.innerHTML=`<h2>Member login</h2><form id="loginForm"><label>Username<input name="username" required></label><label>Password<input name="password" type="password" required></label><button class="btn btn-gold">Secure login</button></form>`;document.querySelector('#loginForm').onsubmit=e=>{e.preventEvent();e.preventDefault();const d=new FormData(e.target),u=storage.get().find(x=>x.username===d.get('username')&&x.password===d.get('password'));if(u){session={username:u.username};localStorage.setItem('valorSession',JSON.stringify(session));renderAuth();updateAuthButton()}else form.insertAdjacentHTML('beforeend','<p class="auth-msg">Invalid username or password.</p>')}}else{form.innerHTML=`<h2>Create account</h2><form id="registerForm"><label>Username<input name="username" required></label><label>Email or phone<input name="contact" required></label><label>Password<input name="password" type="password" minlength="6" required></label><button class="btn btn-gold">Create account</button></form>`;document.querySelector('#registerForm').onsubmit=e=>{e.preventDefault();const d=new FormData(e.target),users=storage.get(),username=d.get('username');if(users.some(u=>u.username===username)){form.insertAdjacentHTML('beforeend','<p class="auth-msg">Username already exists.</p>');return}users.push({username,password:d.get('password'),contact:d.get('contact'),role:'MEMBER',membership:'Inactive',registered:new Date().toISOString()});storage.set(users);session={username};localStorage.setItem('valorSession',JSON.stringify(session));renderAuth();updateAuthButton()}}}
+function updateAuthButton(){authBtn.textContent=session?'My profile':'Member login'}authBtn.onclick=()=>{renderAuth();authModal.showModal()};updateAuthButton();
+function renderAdmin(){const users=storage.get();authView.innerHTML=`<h2>Admin dashboard</h2><p>${users.length} registered members</p><div style="max-height:360px;overflow:auto">${users.map((u,i)=>`<div style="border-bottom:1px solid #ffffff20;padding:10px 0"><b>${u.username}</b> • ${u.role}<br><small>${u.membership} membership</small><div style="margin-top:8px"><select id="role-${i}"><option>MEMBER</option><option>MEMBERSHIP</option><option>ELITE</option><option>MANAGER</option><option>CO-LEADER</option><option>LEADER</option></select><button class="btn btn-gold" onclick="changeRole(${i},'role-${i}')">Set role</button></div></div>`).join('')}</div>`}
+window.changeRole=(i,id)=>{const users=storage.get();users[i].role=document.querySelector('#'+id).value;if(users[i].role==='MEMBERSHIP')users[i].membership='Active';renderAdmin();storage.set(users)};
+
+document.querySelector('#applyBtn').onclick=()=>document.querySelector('#applyModal').showModal();document.querySelector('#applyForm').onsubmit=e=>{e.preventDefault();const apps=JSON.parse(localStorage.getItem('valorApplications')||'[]');apps.push(Object.fromEntries(new FormData(e.target)));localStorage.setItem('valorApplications',JSON.stringify(apps));e.target.reset();closeAll();alert('Application submitted successfully.')};
+
+document.querySelectorAll('.match-row .btn').forEach(b=>b.onclick=()=>{b.textContent='Reminder set';b.disabled=true});

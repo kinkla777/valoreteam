@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090806" />
+  <title>VΛLOR Team — PUBG Esports</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="nav" id="nav">
+    <a class="brand" href="#home" aria-label="VΛLOR home"><span class="brand-mark">V</span><span>VΛLOR <b>TEAM</b></span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
+    <nav id="navLinks">
+      <a href="#news">News</a><a href="#roster">Roster</a><a href="#tournaments">Matches</a><a href="#achievements">Legacy</a><a href="#join">Join</a>
+    </nav>
+    <div class="nav-actions"><button class="icon-btn" id="themeBtn" title="Toggle theme">◐</button><button class="btn btn-gold" id="authBtn">Member login</button></div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="grid-bg"></div><div class="hero-glow"></div>
+      <div class="hero-copy reveal">
+        <div class="eyebrow"><span></span> Professional PUBG Esports</div>
+        <h1>FORGED FOR<br><em>VICTORY.</em></h1>
+        <p>Precision in every decision. Courage in every fight. VΛLOR is built to compete at the highest level.</p>
+        <div class="hero-actions"><a class="btn btn-gold" href="#roster">Meet the team <b>→</b></a><a class="text-link" href="#tournaments">View schedule <b>↗</b></a></div>
+      </div>
+      <div class="hero-stat reveal"><span>EST.</span><strong>2024</strong></div>
+      <div class="scroll-cue">SCROLL <span></span></div>
+    </section>
+
+    <section class="ticker" aria-label="Announcement ticker"><div><b>LIVE</b><span>VΛLOR OPEN QUALIFIERS</span><i>•</i><span>NEXT MATCH 28 NOV</span><i>•</i><span>ROAD TO THE GRAND FINAL</span></div></section>
+
+    <section class="section" id="news">
+      <div class="section-head reveal"><div><span class="kicker">LATEST INTELLIGENCE</span><h2>NEWS & <em>UPDATES</em></h2></div><a class="text-link" href="#">View all news <b>→</b></a></div>
+      <div class="news-grid" id="newsGrid">
+        <article class="feature-card reveal"><div class="news-image image-1"><span>FEATURE</span></div><div class="card-body"><small>20 NOV 2026</small><h3>VΛLOR Secures Top Four at Regional Championship</h3><p>A commanding final day performance puts VΛLOR among the region's elite.</p></div></article>
+        <article class="small-card reveal"><div class="news-image image-2"></div><div class="card-body"><small>18 NOV 2026</small><h3>Roster Update: Welcome “Hawk”</h3></div></article>
+        <article class="small-card reveal"><div class="news-image image-3"></div><div class="card-body"><small>12 NOV 2026</small><h3>Open Trials Begin This Month</h3></div></article>
+      </div>
+    </section>
+
+    <section class="section dark-section" id="roster">
+      <div class="section-head reveal"><div><span class="kicker">THE ELITE UNIT</span><h2>OUR <em>ROSTER</em></h2></div><div class="role-filter" id="roleFilter"><button class="active" data-role="ALL">All</button><button data-role="LEADER">Leader</button><button data-role="CO-LEADER">Co-Leader</button><button data-role="MANAGER">Manager</button><button data-role="ELITE">Elite</button></div></div>
+      <div class="roster-grid" id="rosterGrid"></div>
+    </section>
+
+    <section class="section" id="tournaments">
+      <div class="section-head reveal"><div><span class="kicker">COMPETITIVE CALENDAR</span><h2>UPCOMING <em>MATCHES</em></h2></div></div>
+      <div class="match-list">
+        <article class="match-row reveal"><time><b>28</b><span>NOV</span></time><div><small>REGIONAL SERIES • QUALIFIER</small><h3>VΛLOR <em>VS</em> ECLIPSE</h3></div><div class="match-meta"><span>EUROPE</span><strong>18:00 UTC</strong></div><button class="btn btn-outline">Set reminder</button></article>
+        <article class="match-row reveal"><time><b>02</b><span>DEC</span></time><div><small>MAJOR CIRCUIT • GROUP B</small><h3>VΛLOR <em>VS</em> NIGHTWING</h3></div><div class="match-meta"><span>GLOBAL</span><strong>16:30 UTC</strong></div><button class="btn btn-outline">Set reminder</button></article>
+        <article class="match-row reveal"><time><b>09</b><span>DEC</span></time><div><small>OPEN CHAMPIONSHIP • FINAL</small><h3>VΛLOR <em>VS</em> TBD</h3></div><div class="match-meta"><span>EUROPE</span><strong>19:00 UTC</strong></div><button class="btn btn-outline">Set reminder</button></article>
+      </div>
+    </section>
+
+    <section class="achievements" id="achievements"><div class="section-head reveal"><div><span class="kicker">VΛLOR LEGACY</span><h2>HALL OF <em>VICTORY</em></h2></div></div><div class="trophy-grid"><div><strong>01</strong><h3>REGIONAL CHAMPIONS</h3><p>2026</p></div><div><strong>04</strong><h3>TOP FINISHES</h3><p>2025—2026</p></div><div><strong>12</strong><h3>TEAM TITLES</h3><p>ALL-TIME</p></div></div></section>
+
+    <section class="join" id="join"><div class="join-bg"></div><div class="join-content reveal"><span class="kicker">JOIN THE LEGION</span><h2>BUILT DIFFERENT.<br><em>PLAY WITH US.</em></h2><p>Applications are open for skilled PUBG competitors ready to raise the standard.</p><button class="btn btn-gold" id="applyBtn">Apply for tryouts →</button></div></section>
+  </main>
+
+  <footer><div class="brand"><span class="brand-mark">V</span><span>VΛLOR <b>TEAM</b></span></div><p>© 2026 VΛLOR Team. All rights reserved.</p><div class="socials"><a href="#">DISCORD</a><a href="#">X / TWITTER</a><a href="#">YOUTUBE</a></div></footer>
+
+  <dialog id="authModal"><button class="modal-close" data-close>×</button><div id="authView"></div></dialog>
+  <dialog id="applyModal"><button class="modal-close" data-close>×</button><form id="applyForm"><span class="kicker">VΛLOR TRYOUTS</span><h2>Player application</h2><label>Player name<input name="name" required></label><label>In-game name<input name="ign" required></label><label>Email or phone<input name="contact" required></label><label>Role<select name="position"><option>In-Game Leader</option><option>Fragger</option><option>Support</option><option>Scout</option></select></label><button class="btn btn-gold" type="submit">Submit application</button></form></dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
