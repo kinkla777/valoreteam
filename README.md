@@ -1,2 +1,3 @@
-# valor-esports
-VΛLOR — Professional PUBG esports organization website
+# VΛLOR Team
+
+VΛLOR Team — professional PUBG esports organization website.
